@@ -5,6 +5,8 @@ module.exports = {
         .setName('ping')
         .setDescription('Replies with Pong!'),
     async execute(interaction) {
-        await interaction.reply('Pong!');
+        const sent = await interaction.reply({content: 'Pong!', fetchReply: true});
+        const latency = sent.createdTimestamp - interaction.createdTimestamp;
+        await interaction.editReply({content: `Pong! Latency: ${latency}ms`});
     },
 };
